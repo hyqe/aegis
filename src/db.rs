@@ -9,21 +9,6 @@ pub struct User {
     email: String,
 }
 
-pub async fn create_user_table() -> Result<(), sqlx::Error> {
-    let uri = env::var("PG").expect("Error: PG not found");
-
-    let pool = PgPoolOptions::new()
-        .max_connections(1)
-        .connect(uri.as_str()).await?;
-
-    sqlx::query("C INTO users (id, email) VALUES (?, ?);")
-    .bind(u.id.clone())
-    .bind(u.email.clone())
-    .execute(&pool).await?;
-
-    Ok(())
-}
-
 
 pub async fn create_user(u: &User) -> Result<(), sqlx::Error> {
     let uri = env::var("PG").expect("Error: PG not found");

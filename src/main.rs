@@ -1,5 +1,10 @@
 mod db;
+mod server;
 
-fn main() {
-    println!("Hello, world!");
+#[tokio::main]
+async fn main() {
+    let cfg = server::Config::get_config().unwrap();
+
+    println!("Server running on port: {}", cfg.port);
+    server::run(cfg).await;
 }
