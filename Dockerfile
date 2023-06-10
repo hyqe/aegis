@@ -3,7 +3,7 @@ WORKDIR /app
 COPY . .
 RUN cargo build --release
 
-FROM gcr.io/distroless/base-debian11
+FROM ubuntu
 WORKDIR /
 COPY --from=compile /app/target/release/aegis /aegis
 ENV PORT=80
